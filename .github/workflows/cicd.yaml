@@ -21,6 +21,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Debug Secrets & GitHub Context
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "Event: ${{ github.event_name }}"
+          echo "Role ARN starts with: ${{ startsWith(secrets.AWS_IAM_ROLE, 'arn:aws:iam') }}"
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
